@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes(['verify' => true, 'register' => false]);
+
+Route::middleware(['auth'])
+    ->group(function(){
+
+        Route::resource('kkm', 'KKMController')->only([
+            'index', 'show'
+        ]);
+
+        Route::get('/home', 'HomeController@index')->name('home');
+
+    });
+
+

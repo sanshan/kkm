@@ -1,1 +1,49 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Material Design Icons
+@import '~@mdi/font/scss/materialdesignicons';
+
+// Font Awesome
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+@import "~buefy/dist/buefy.css";
+
+
+
+.collection {
+    margin: 0 auto;
+
+    .tableFilters {
+        margin-bottom: 10px;
+        input {
+            width: 175px;
+        }
+        .control {
+            float: right;
+        }
+    }
+
+    .table {
+        width: 100%;
+
+        .sorting {
+            background-image: url('/images/sort_both.png');
+            background-repeat: no-repeat;
+            background-position: center right;
+        }
+        .sorting_asc {
+            background-image: url('/images/sort_asc.png');
+            background-repeat: no-repeat;
+            background-position: center right;
+        }
+        .sorting_desc {
+            background-image: url('/images/sort_desc.png');
+            background-repeat: no-repeat;
+            background-position: center right;
+        }
+    }
+}
