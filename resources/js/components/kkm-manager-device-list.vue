@@ -61,20 +61,20 @@
                             {{ props.row.id }}
                         </b-table-column>
 
-                        <b-table-column field="factory_number" label="Заводской номер" sortable>
-                            {{ props.row.factory_number }}
+<!--                        <b-table-column field="factory_number" label="Заводской номер" sortable>-->
+<!--                            {{ props.row.factory_number }}-->
+<!--                        </b-table-column>-->
+
+                        <b-table-column field="serial" label="Серийный номер" sortable>
+                            {{ props.row.serial }}
                         </b-table-column>
 
-                        <b-table-column field="serial_number" label="Серийный номер" sortable>
-                            {{ props.row.serial_number }}
+                        <b-table-column field="azs" label="АЗС" sortable>
+                            {{ props.row.azs }}
                         </b-table-column>
 
-                        <b-table-column field="gas_station_id" label="АЗС" sortable>
-                            {{ props.row.gas_station_id }}
-                        </b-table-column>
-
-                        <b-table-column field="region_id" label="Регион" sortable>
-                            {{ props.row.region_id }}
+                        <b-table-column field="region" label="Регион" sortable>
+                            {{ props.row.region }}
                         </b-table-column>
                     </template>
                 </b-table>
@@ -88,10 +88,9 @@
 
     const fields = [
         {label: 'id', name: 'id'},
-        {label: 'Заводской номер', name: 'factory_number'},
-        {label: 'Серийный номер', name: 'serial_number'},
-        {label: 'АЗС', name: 'gas_station_id'},
-        {label: 'Регион', name: 'region_id'}
+        {label: 'Серийный номер', name: 'serial'},
+        {label: 'АЗС', name: 'azs'},
+        {label: 'Регион', name: 'region'}
     ];
 
     const rowsOnPage = [
@@ -117,8 +116,8 @@
                 perPage: 10,
                 perPageDefault: 10,
                 search: '',
-                searchFieldDefault: 'factory_number',
-                sortField: 'gas_station',
+                searchFieldDefault: 'serial',
+                sortField: 'azs',
             }
         },
         created() {

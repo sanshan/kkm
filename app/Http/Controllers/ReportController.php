@@ -17,7 +17,7 @@ class ReportController extends Controller
     private function getCountWorkedDays($device)
     {
         $device['worked_days'] = Report::selectRaw('osnov')
-            ->where('osnov', $device['serial_number'])
+            ->where('osnov', $device['serial'])
             ->groupBy('date', 'osnov')
             ->get()
             ->count();

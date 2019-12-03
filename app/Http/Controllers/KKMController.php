@@ -23,7 +23,10 @@ class KKMController extends Controller
         $dir = $request->input('dir') ?? 'desc';
         $searchValue = $request->input('search');
 
-        $query = KKM::select(KKM::SELECTABLE_COLUMNS);
+        $query = KKM::select(KKM::SELECTABLE_COLUMNS)
+        ->join('azs', 'azs.skladID', '=', 'kkm.azs');
+
+
 
         if (isset(KKM::SORTABLE_COLUMNS[$field])) {
             $query->orderBy($field, $dir);
@@ -33,6 +36,8 @@ class KKMController extends Controller
             $query->where($searchField, 'like', '%' . $searchValue . '%');
         }
         $collection = $query->paginate($perPage);
+
+//        dd($collection);
 
         if (request()->wantsJson()) {
             return new KKMCollection(0, $collection);

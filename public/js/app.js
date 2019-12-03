@@ -1940,17 +1940,14 @@ var fields = [{
   label: 'id',
   name: 'id'
 }, {
-  label: 'Заводской номер',
-  name: 'factory_number'
-}, {
   label: 'Серийный номер',
-  name: 'serial_number'
+  name: 'serial'
 }, {
   label: 'АЗС',
-  name: 'gas_station_id'
+  name: 'azs'
 }, {
   label: 'Регион',
-  name: 'region_id'
+  name: 'region'
 }];
 var rowsOnPage = [{
   label: '10',
@@ -1983,8 +1980,8 @@ var rowsOnPage = [{
       perPage: 10,
       perPageDefault: 10,
       search: '',
-      searchFieldDefault: 'factory_number',
-      sortField: 'gas_station'
+      searchFieldDefault: 'serial',
+      sortField: 'azs'
     };
   },
   created: function created() {
@@ -19033,9 +19030,9 @@ var render = function() {
                     { key: index, domProps: { value: option.name } },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
                           _vm._s(option.label) +
-                          "\n                    "
+                          "\n                        "
                       )
                     ]
                   )
@@ -19079,9 +19076,9 @@ var render = function() {
                     { key: index, domProps: { value: option.name } },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
                           _vm._s(option.label) +
-                          "\n                    "
+                          "\n                        "
                       )
                     ]
                   )
@@ -19143,9 +19140,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n                            " +
                             _vm._s(props.row.id) +
-                            "\n                    "
+                            "\n                        "
                         )
                       ]
                     ),
@@ -19154,52 +19151,28 @@ var render = function() {
                       "b-table-column",
                       {
                         attrs: {
-                          field: "factory_number",
-                          label: "Заводской номер",
-                          sortable: ""
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.factory_number) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: {
-                          field: "serial_number",
+                          field: "serial",
                           label: "Серийный номер",
                           sortable: ""
                         }
                       },
                       [
                         _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.serial_number) +
-                            "\n                    "
+                          "\n                            " +
+                            _vm._s(props.row.serial) +
+                            "\n                        "
                         )
                       ]
                     ),
                     _vm._v(" "),
                     _c(
                       "b-table-column",
-                      {
-                        attrs: {
-                          field: "gas_station_id",
-                          label: "АЗС",
-                          sortable: ""
-                        }
-                      },
+                      { attrs: { field: "azs", label: "АЗС", sortable: "" } },
                       [
                         _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.gas_station_id) +
-                            "\n                    "
+                          "\n                            " +
+                            _vm._s(props.row.azs) +
+                            "\n                        "
                         )
                       ]
                     ),
@@ -19208,16 +19181,16 @@ var render = function() {
                       "b-table-column",
                       {
                         attrs: {
-                          field: "region_id",
+                          field: "region",
                           label: "Регион",
                           sortable: ""
                         }
                       },
                       [
                         _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.region_id) +
-                            "\n                    "
+                          "\n                            " +
+                            _vm._s(props.row.region) +
+                            "\n                        "
                         )
                       ]
                     )

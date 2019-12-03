@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     protected $table = 'pko';
+
+    protected $connection = 'remote-mysql';
 }
