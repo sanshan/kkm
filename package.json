@@ -27,6 +27,6 @@
         "@fortawesome/fontawesome-free": "^5.11.2",
         "@mdi/font": "^4.6.95",
         "buefy": "^0.8.8",
-        "xlsx": "^0.15.3"
+        "vue-json-excel": "^0.2.98"
     }
 }
