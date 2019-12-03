@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Auth::routes(['verify' => true, 'register' => false]);
+Auth::routes(['verify' => true, 'register' => false, 'reset' => false]);
 
 Route::middleware(['auth'])
     ->group(function(){

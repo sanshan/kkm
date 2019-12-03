@@ -41,22 +41,24 @@
                     </a>
                 </div>
                 <div class="navbar-end">
-                    <div class="navbar-item">
-                        @auth
-                            <form id="logout-form" class="is-hidden" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                            </form>
-                            <div class="buttons">
+                    @auth
+                        <form id="logout-form" class="is-hidden" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        </form>
+                        <div class="buttons">
+                            <div class="navbar-item">
                                 <a class="has-margin-right-5" href="#" role="button">
                                     {{ Auth::user()->name }}
                                 </a>
+                            </div>
+                            <div class="navbar-item">
                                 <a class="button is-light" href="#"
                                    onclick="document.getElementById('logout-form').submit()">
                                     @lang('pages.Logout')
                                 </a>
                             </div>
-                        @endauth
-                    </div>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </div>
