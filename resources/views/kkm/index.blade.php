@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <device-list></device-list>
+    <kkm-manager></kkm-manager>
 @endsection

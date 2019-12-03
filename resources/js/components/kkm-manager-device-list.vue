@@ -1,8 +1,8 @@
 <template>
-    <section id="deviceList" class="hero is-margin-2">
+    <div id="deviceList">
 
-        <div class="columns is-centered">
-            <div class="column has-text-centered">
+        <div id="deviceListButton" class="columns">
+            <div class="column is-3">
                 <b-field label="Поиск">
                     <b-input v-model="search" @input="loadAsyncData" value=""></b-input>
                 </b-field>
@@ -19,9 +19,9 @@
                     </b-select>
                 </b-field>
             </div>
-            <div class="column is-3">
-                <b-field label="Количество строк">
-                    <b-select v-model="perPage" @input="loadAsyncData">
+            <div class="column is-offset-4 is-2">
+                <b-field class="has-text-right" label="Количество строк">
+                    <b-select class="is-pulled-right" v-model="perPage" @input="loadAsyncData">
                         <option
                             v-for="(option,index) in rowsOnPage"
                             :value="option.name"
@@ -33,48 +33,54 @@
             </div>
         </div>
 
-        <b-table
-            :data="collectionData"
-            hoverable
 
-            paginated
-            backend-pagination
-            :total="total"
-            :per-page="perPage"
-            @page-change="onPageChange"
+        <div id="deviceListTable" class="columns">
+            <div class="column is-full">
+                <b-table
+                    :data="collectionData"
+                    hoverable
 
-            backend-sorting
-            :default-sort-direction="defaultSortDirection"
-            :default-sort="[sortField, sortDirection]"
-            @sort="onSort"
+                    paginated
+                    backend-pagination
+                    :total="total"
+                    :per-page="perPage"
+                    @page-change="onPageChange"
 
-            checkable
-        >
+                    backend-sorting
+                    :default-sort-direction="defaultSortDirection"
+                    :default-sort="[sortField, sortDirection]"
+                    @sort="onSort"
 
-            <template slot-scope="props">
-                <b-table-column field="id" label="ID" width="40" numeric>
-                    {{ props.row.id }}
-                </b-table-column>
+                    checkable
+                    :checked-rows.sync="checkedRows"
+                    @check = "onCheck"
+                >
 
-                <b-table-column field="factory_number" label="Заводской номер" sortable>
-                    {{ props.row.factory_number }}
-                </b-table-column>
+                    <template slot-scope="props">
+                        <b-table-column field="id" label="ID" width="40" numeric>
+                            {{ props.row.id }}
+                        </b-table-column>
 
-                <b-table-column field="serial_number" label="Серийный номер" sortable>
-                    {{ props.row.serial_number }}
-                </b-table-column>
+                        <b-table-column field="factory_number" label="Заводской номер" sortable>
+                            {{ props.row.factory_number }}
+                        </b-table-column>
 
-                <b-table-column field="gas_station_id" label="АЗС" sortable>
-                    {{ props.row.gas_station_id }}
-                </b-table-column>
+                        <b-table-column field="serial_number" label="Серийный номер" sortable>
+                            {{ props.row.serial_number }}
+                        </b-table-column>
 
-                <b-table-column field="region_id" label="Регион" sortable>
-                    {{ props.row.region_id }}
-                </b-table-column>
-            </template>
+                        <b-table-column field="gas_station_id" label="АЗС" sortable>
+                            {{ props.row.gas_station_id }}
+                        </b-table-column>
 
-        </b-table>
-    </section>
+                        <b-table-column field="region_id" label="Регион" sortable>
+                            {{ props.row.region_id }}
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -102,6 +108,7 @@
                 collectionData,
                 fields,
                 rowsOnPage,
+                checkedRows: [],
                 total: 0,
                 loading: false,
                 sortDirection: 'desc',
@@ -136,13 +143,16 @@
                     .then(({data}) => {
                         this.total = data.meta.total;
                         this.collectionData = data.data;
-                        this.loading = false
                     })
                     .catch((error) => {
-                        this.data = [];
                         this.total = 0;
+                        this.collectionData = [];
+                        throw error;
+                    })
+                    .finally(() => {
+                        this.checkedRows = [];
                         this.loading = false;
-                        throw error
+                        this.onCheck([]);
                     })
             },
             /*
@@ -159,13 +169,13 @@
                 this.sortField = field;
                 this.sortDirection = order;
                 this.loadAsyncData()
+            },
+            /*
+             * Handle check event
+             */
+            onCheck(checkedList) {
+                this.$emit('select-device', checkedList)
             }
         }
     }
 </script>
-
-<style>
-    .is-margin-2 {
-        margin: 2rem
-    }
-</style>

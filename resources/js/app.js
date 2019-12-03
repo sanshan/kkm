@@ -47,7 +47,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('device-list', require('./components/device-list.vue').default);
+Vue.component('kkm-manager', require('./components/kkm-manager.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
