@@ -7,8 +7,11 @@
 // window.Vue = require('vue');
 import Vue from 'vue'
 import Buefy from 'buefy'
-
+import moment from 'moment'
+Vue.prototype.$moment = moment;
 Vue.use(Buefy);
+
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

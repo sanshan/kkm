@@ -6,18 +6,16 @@
                     <b-button
                         type="is-primary"
                         icon-left="download"
-                        :disabled="!checkedDevices.length"
-                    >
+                        :disabled="!checkedDevices.length">
                         <download-excel
                             :fetch="getReport1"
                             :fields="report1Fields"
                             :before-generate="startDownload"
-                            :before-finish="finishDownload"
-                        >
+                            :before-finish="finishDownload">
+
                             Сформировать отчёт
                         </download-excel>
                     </b-button>
-
 
                     <b-taglist attached>
                         <b-tag type="is-light">ККМ выбрано</b-tag>
@@ -31,7 +29,7 @@
             <div class="column is-full">
                 <kkm-manager-device-list
                     @select-device="updateDeviceCollection"
-                >
+                    @period-set="periodSet">
                 </kkm-manager-device-list>
             </div>
         </div>
@@ -52,6 +50,7 @@
                 checkedDevices: [],
                 report1: [],
                 loadingComponent: null,
+                period: [],
                 report1Fields: {
                     'ID': 'id',
                     'Серийный номер': 'serial',
@@ -70,9 +69,13 @@
             updateDeviceCollection(checkedDevices) {
                 this.checkedDevices = checkedDevices
             },
+            periodSet(period) {
+                this.period = period
+            },
             async getReport1() {
                 const params = {
-                    devices: this.checkedDevices
+                    devices: this.checkedDevices,
+                    period: this.period
                 };
                 const response = {};
                 try {
