@@ -26,14 +26,20 @@ class KKMIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'length'=> 'integer',
-            'draw' => 'integer',
-            'column' => 'between:0,'.(count(KKM::SORTABLE_COLUMNS)-1),
-            'dir' => [
-                'string',
-                Rule::in(['desc', 'asc'])
+            'per_page'     => 'required|integer',
+            'sort_field'   => [
+                'required',
+                Rule::in(array_keys(KKM::SORTABLE_COLUMNS)),
             ],
-            'search' => 'nullable|string',
+            'dir'          => [
+                'required',
+                Rule::in(['desc', 'asc']),
+            ],
+            'search_field' => [
+                'required',
+                Rule::in(array_keys(KKM::SORTABLE_COLUMNS)),
+            ],
+            'search'       => 'nullable|string',
         ];
     }
 }

@@ -6,15 +6,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class KKMCollection extends ResourceCollection
 {
-    private $draw;
-
-    public function __construct($draw, $resource)
-    {
-        $this->draw = $draw ?? 0;
-
-        parent::__construct($resource);
-    }
-
     /**
      * Transform the resource collection into an array.
      *
@@ -25,7 +16,6 @@ class KKMCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection,
-            'draw' => $this->draw,
         ];
     }
 }

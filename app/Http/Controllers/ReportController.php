@@ -6,7 +6,6 @@ use App\Report;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
-use function foo\func;
 
 class ReportController extends Controller
 {
@@ -38,11 +37,10 @@ class ReportController extends Controller
 
         }
 
-
         $response = array_map(
             function ($device) use ($years, $period) {
                 $count = 0;
-                \Log::info(print_r($years,true));
+
                 foreach ($years as $year) {
                     $builder = DB::connection('remote-mysql')->table($year)->selectRaw('osnov');
                     $builder->where('osnov', $device['serial'])
@@ -52,8 +50,8 @@ class ReportController extends Controller
                         $start = Carbon::parse($period[0])->timezone('Europe/Moscow')->toDateString();
                         $end = Carbon::parse($period[1])->timezone('Europe/Moscow')->toDateString();
 
-                        $builder->Where('date', '>', $start)
-                            ->where('date', '<', $end);
+                        $builder->Where('date', '>=', $start)
+                            ->where('date', '<=', $end);
 
                     }
                     $count += $builder->get()->count();
@@ -65,6 +63,9 @@ class ReportController extends Controller
             },
             $request->params['devices']
         );
+
+
+        \Log::info(print_r($response,true));
 
         return response()->json($response);
     }

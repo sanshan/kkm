@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::namespace('api\v1')
+    ->prefix('v1')
+    ->name('api.')
+    ->group(function () {
+        Route::apiResource('kkm', 'KKMController')->only('index');
+    });
+
+
+

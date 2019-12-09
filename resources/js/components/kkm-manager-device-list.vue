@@ -101,7 +101,6 @@
     const collectionData = [];
 
     const fields = [
-        {label: 'id', name: 'id'},
         {label: 'Серийный номер', name: 'serial'},
         {label: 'АЗС', name: 'azs'},
         {label: 'Регион', name: 'region'}
@@ -177,14 +176,14 @@
                     page: this.page,
                     per_page: this.perPage,
                     dir: this.sortDirection,
-                    field: this.sortField,
+                    sort_field: this.sortField,
                     search: this.search,
                     search_field: this.searchFieldDefault,
                     period: this.dates
                 };
 
                 this.loading = true;
-                axios.get('/kkm', {params: params})
+                axios.get('/api/v1/kkm', {params: params})
                     .then(({data}) => {
                         this.total = data.meta.total;
                         this.collectionData = data.data;

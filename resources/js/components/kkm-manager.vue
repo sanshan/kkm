@@ -80,9 +80,10 @@
                 const response = {};
                 try {
                     const response = await axios.post('/reports', {params: params});
+                    console.log(response);
                     return response.data;
                 } catch (error) {
-                    console.error(error);
+                    throw error;
                 } finally {
                     this.loadingComponent.close()
                 }

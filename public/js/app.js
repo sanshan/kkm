@@ -1951,9 +1951,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 var collectionData = [];
 var fields = [{
-  label: 'id',
-  name: 'id'
-}, {
   label: 'Серийный номер',
   name: 'serial'
 }, {
@@ -2022,13 +2019,13 @@ var dayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
         page: this.page,
         per_page: this.perPage,
         dir: this.sortDirection,
-        field: this.sortField,
+        sort_field: this.sortField,
         search: this.search,
         search_field: this.searchFieldDefault,
         period: this.dates
       };
       this.loading = true;
-      axios.get('/kkm', {
+      axios.get('/api/v1/kkm', {
         params: params
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2187,24 +2184,25 @@ __webpack_require__.r(__webpack_exports__);
 
             case 5:
               _response = _context.sent;
+              console.log(_response);
               return _context.abrupt("return", _response.data);
 
-            case 9:
-              _context.prev = 9;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](2);
-              console.error(_context.t0);
+              throw _context.t0;
 
-            case 12:
-              _context.prev = 12;
+            case 13:
+              _context.prev = 13;
               this.loadingComponent.close();
-              return _context.finish(12);
+              return _context.finish(13);
 
-            case 15:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this, [[2, 9, 12, 15]]);
+      }, null, this, [[2, 10, 13, 16]]);
     },
     startDownload: function startDownload() {
       this.loadingComponent = this.$buefy.loading.open();
