@@ -2164,22 +2164,25 @@ __webpack_require__.r(__webpack_exports__);
     periodSet: function periodSet(period) {
       this.period = period;
     },
-    getReport1: function getReport1() {
+    getReport: function getReport() {
       var params, response, _response;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getReport1$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getReport$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               params = {
                 devices: this.checkedDevices,
-                period: this.period
+                period: this.period,
+                title: 'number_of_days_worked_by_kkm'
               };
               response = {};
               _context.prev = 2;
               _context.next = 5;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('/reports', {
-                params: params
+                devices: this.checkedDevices,
+                period: this.period,
+                title: 'number_of_days_worked_by_kkm'
               }));
 
             case 5:
@@ -36096,7 +36099,7 @@ var render = function() {
                   "download-excel",
                   {
                     attrs: {
-                      fetch: _vm.getReport1,
+                      fetch: _vm.getReport,
                       fields: _vm.report1Fields,
                       "before-generate": _vm.startDownload,
                       "before-finish": _vm.finishDownload

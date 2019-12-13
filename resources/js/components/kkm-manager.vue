@@ -8,7 +8,7 @@
                         icon-left="download"
                         :disabled="!checkedDevices.length">
                         <download-excel
-                            :fetch="getReport1"
+                            :fetch="getReport"
                             :fields="report1Fields"
                             :before-generate="startDownload"
                             :before-finish="finishDownload">
@@ -72,14 +72,19 @@
             periodSet(period) {
                 this.period = period
             },
-            async getReport1() {
+            async getReport() {
                 const params = {
                     devices: this.checkedDevices,
-                    period: this.period
+                    period: this.period,
+                    title: 'number_of_days_worked_by_kkm'
                 };
                 const response = {};
                 try {
-                    const response = await axios.post('/reports', {params: params});
+                    const response = await axios.post('/reports', {
+                        devices: this.checkedDevices,
+                        period: this.period,
+                        title: 'number_of_days_worked_by_kkm',
+                    });
                     console.log(response);
                     return response.data;
                 } catch (error) {

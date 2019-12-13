@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Services\Reports\ReportFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Report extends Model
 {
@@ -17,7 +19,11 @@ class Report extends Model
         '2019' => 'pko',
     ];
 
+    public static function build(Request $request, ReportFactory $reportFactory)
+    {
 
-//    public
+        return $reportFactory::make($request->validated);
+    }
+
 }
 
