@@ -73,10 +73,14 @@
                 this.period = period
             },
             async getReport() {
+                console.log(this.period);
                 try {
                     const response = await axios.post('/reports', {
                         devices: this.checkedDevices,
-                        period: this.period,
+                        period: this.period.map(date => {
+                            let tzoffset = (new Date()).getTimezoneOffset() * 60000;
+                            return (new Date(date - tzoffset)).toISOString();
+                        }),
                         title: 'number_of_days_worked_by_kkm',
                     });
                     return response.data;

@@ -33,6 +33,7 @@ class ReportFactory
     {
         $reportClass = $this->makeClassName('Class');
         try {
+            \Log::info(print_r($this->getParams(), true));
             return new $reportClass($this->getParams());
         } catch (Exception $e) {
             $report = new EmptyReport();

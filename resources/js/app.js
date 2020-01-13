@@ -7,8 +7,8 @@
 // window.Vue = require('vue');
 import Vue from 'vue'
 import Buefy from 'buefy'
-import moment from 'moment'
-Vue.prototype.$moment = moment;
+// import moment from 'moment'
+// Vue.prototype.$moment = moment;
 Vue.use(Buefy);
 
 
