@@ -66,10 +66,10 @@ class EmptyReport implements ReportInterface
     {
         return [
             'message' => __($e->getMessage()),
-            'data' => optional($e)->errors(),
+            'data'    => optional($e)->errors(),
             'status'  => optional($e)->status ?? 500,
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
+            'file'    => $e->getFile(),
+            'line'    => $e->getLine(),
         ];
     }
 

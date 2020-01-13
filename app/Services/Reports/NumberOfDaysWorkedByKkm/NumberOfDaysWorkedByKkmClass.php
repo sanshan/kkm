@@ -33,7 +33,8 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
         '2016' => 'pko_2016',
         '2017' => 'pko_2017',
         '2018' => 'pko_2018',
-        '2019' => 'pko',
+        '2019' => 'pko_2019',
+        '2020' => 'pko',
     ];
 
 
@@ -53,7 +54,6 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
      */
     public function __construct($params)
     {
-        \Log::info($params);
         $this->results = $this->getData($this->chkParams($params));
     }
 
@@ -92,7 +92,7 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
     }
 
     /**
-     * Вспомогательный метод для определения таблиц из которых надо брыть данны едля отчёта
+     * Вспомогательный метод для определения таблиц из которых надо брыть данные для отчёта
      *
      * @param array $period
      * @return Collection
