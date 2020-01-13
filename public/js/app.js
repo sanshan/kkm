@@ -2165,47 +2165,44 @@ __webpack_require__.r(__webpack_exports__);
       this.period = period;
     },
     getReport: function getReport() {
-      var params, response, _response;
-
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getReport$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              params = {
-                devices: this.checkedDevices,
-                period: this.period,
-                title: 'number_of_days_worked_by_kkm'
-              };
-              response = {};
-              _context.prev = 2;
-              _context.next = 5;
+              _context.prev = 0;
+              _context.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('/reports', {
                 devices: this.checkedDevices,
                 period: this.period,
                 title: 'number_of_days_worked_by_kkm'
               }));
 
-            case 5:
-              _response = _context.sent;
-              console.log(_response);
-              return _context.abrupt("return", _response.data);
+            case 3:
+              response = _context.sent;
+              return _context.abrupt("return", response.data);
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              this.$buefy.toast.open({
+                duration: 2000,
+                message: _context.t0.response.data.message,
+                position: 'is-bottom',
+                type: 'is-danger'
+              });
 
             case 10:
               _context.prev = 10;
-              _context.t0 = _context["catch"](2);
-              throw _context.t0;
+              this.loadingComponent.close();
+              return _context.finish(10);
 
             case 13:
-              _context.prev = 13;
-              this.loadingComponent.close();
-              return _context.finish(13);
-
-            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this, [[2, 10, 13, 16]]);
+      }, null, this, [[0, 7, 10, 13]]);
     },
     startDownload: function startDownload() {
       this.loadingComponent = this.$buefy.loading.open();

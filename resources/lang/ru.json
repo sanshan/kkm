@@ -1,5 +1,6 @@
 {
     "E-Mail Address": "Логин",
     "Password": "Пароль",
-    "Enter": "Войти"
+    "Enter": "Войти",
+    "The given data was invalid.": "Ошибочные параметры для отчёта."
 }

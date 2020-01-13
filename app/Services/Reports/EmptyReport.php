@@ -5,6 +5,7 @@ namespace App\Services\Reports;
 
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 use Validator;
 
 class EmptyReport implements ReportInterface
@@ -43,14 +44,33 @@ class EmptyReport implements ReportInterface
     /**
      * Добавляет ошибки в $this->errors и возвращает коллекцию с ошибками
      *
-     * @param array $m
+     * @param Exception $e
      * @param bool $clear
      * @return Collection
      */
-    public function setErrors(array $m, bool $clear = false): Collection
+    public function setErrors(Exception $e, bool $clear = false): Collection
     {
-        $this->errors = $clear ? $m : $this->errors + $m;
+        if ($clear) $this->errors = [$this->convertErrorData($e)];
+        else $this->errors[] = $this->convertErrorData($e);
+
         return collect($this->errors);
+    }
+
+    /**
+     * Конвертируем ошибку в нужный формат
+     *
+     * @param Exception $e
+     * @return array
+     */
+    private function convertErrorData(Exception $e): array
+    {
+        return [
+            'message' => __($e->getMessage()),
+            'data' => optional($e)->errors(),
+            'status'  => optional($e)->status ?? 500,
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+        ];
     }
 
     /**
@@ -70,7 +90,7 @@ class EmptyReport implements ReportInterface
      */
     protected function getStatus(): int
     {
-        return 200;
+        return $this->errors()->last()['status'] ?? 200;
     }
 
     /**
@@ -80,7 +100,7 @@ class EmptyReport implements ReportInterface
      */
     protected function getResult()
     {
-        return $this->errors()->count() > 0 ? $this->errors() : $this->results();
+        return $this->errors()->count() > 0 ? $this->errors()->last() : $this->results();
     }
 
     /**
@@ -103,12 +123,8 @@ class EmptyReport implements ReportInterface
     protected function chkParams(Collection $params): Collection
     {
         $validator = Validator::make($params->toArray(), $this->params);
-        if ($validator->fails()) {
-            $this->setErrors($validator->messages()->toArray());
-            throw new Exception($validator->messages());
-        }
 
-        return collect($validator->validated());
+        return collect($validator->validate());
     }
 
 }

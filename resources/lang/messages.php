@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'E-Mail Address' => 'Логин'
+    'E-Mail Address' => 'Логин',
 ];

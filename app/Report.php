@@ -16,7 +16,8 @@ class Report extends Model
         '2016' => 'pko_2016',
         '2017' => 'pko_2017',
         '2018' => 'pko_2018',
-        '2019' => 'pko',
+        '2019' => 'pko_2019',
+        '2020' => 'pko',
     ];
 
     public static function build(Request $request, ReportFactory $reportFactory)

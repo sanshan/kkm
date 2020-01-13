@@ -36,7 +36,7 @@ class ReportFactory
             return new $reportClass($this->getParams());
         } catch (Exception $e) {
             $report = new EmptyReport();
-            $report->setErrors(json_decode($e->getMessage(), true));
+            $report->setErrors($e);
             return $report;
         }
     }

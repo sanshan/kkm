@@ -16,10 +16,13 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
      * @var array|Collection
      */
     protected $params = [
-        'period'     => 'nullable|array',
-        'period.*'   => 'iso_date',
-        'devices'    => 'required|array',
-        'devices.id' => 'exists:remote-mysql.kkm,id',
+        'period'           => 'nullable|array',
+        'period.*'         => 'iso_date',
+        'devices'          => 'required|array',
+        'devices.*.id'     => 'required|exists:remote-mysql.kkm,id',
+        'devices.*.serial' => 'required|string',
+        'devices.*.region' => 'required|integer',
+        'devices.*.azs'    => 'required|integer',
     ];
 
     /**
@@ -33,6 +36,12 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
         '2019' => 'pko',
     ];
 
+
+    /**
+     * Значение для периода поумолчанию
+     *
+     * @var array
+     */
     private $defaultYears = [
         '2019' => 'pko',
     ];
@@ -44,6 +53,7 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
      */
     public function __construct($params)
     {
+        \Log::info($params);
         $this->results = $this->getData($this->chkParams($params));
     }
 
@@ -57,7 +67,9 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
     {
         $devices = collect($params['devices']);
         $years = $this->setYears($params['period']);
+
         return $devices->map(function ($item, $key) use ($years, $params) {
+
             $item['worked_days'] = 0;
             foreach ($years as $year) {
                 $builder = DB::connection('remote-mysql')->table($year)->selectRaw('osnov');
@@ -78,7 +90,6 @@ class NumberOfDaysWorkedByKkmClass extends EmptyReport
             return $item;
         });
     }
-
 
     /**
      * Вспомогательный метод для определения таблиц из которых надо брыть данны едля отчёта

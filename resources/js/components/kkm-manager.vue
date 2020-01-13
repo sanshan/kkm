@@ -73,22 +73,20 @@
                 this.period = period
             },
             async getReport() {
-                const params = {
-                    devices: this.checkedDevices,
-                    period: this.period,
-                    title: 'number_of_days_worked_by_kkm'
-                };
-                const response = {};
                 try {
                     const response = await axios.post('/reports', {
                         devices: this.checkedDevices,
                         period: this.period,
                         title: 'number_of_days_worked_by_kkm',
                     });
-                    console.log(response);
                     return response.data;
                 } catch (error) {
-                    throw error;
+                    this.$buefy.toast.open({
+                        duration: 2000,
+                        message: error.response.data.message,
+                        position: 'is-bottom',
+                        type: 'is-danger'
+                    })
                 } finally {
                     this.loadingComponent.close()
                 }

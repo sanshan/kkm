@@ -4,6 +4,7 @@
 namespace App\Services\Reports;
 
 
+use Exception;
 use Illuminate\Support\Collection;
 
 interface ReportInterface
@@ -20,11 +21,11 @@ interface ReportInterface
     /**
      * Добавляет ошибки в $this->errors и возвращает коллекцию с ошибками
      *
-     * @param array $m
+     * @param Exception $e
      * @param bool $clear
      * @return Collection
      */
-    public function setErrors(array $m, bool $clear = false) : Collection;
+    public function setErrors(Exception $e, bool $clear = false) : Collection;
 
     /**
      * Метод должен вернуть массив, первым элементом которого будут данные отчёта,
