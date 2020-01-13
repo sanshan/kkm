@@ -64,9 +64,11 @@ class EmptyReport implements ReportInterface
      */
     private function convertErrorData(Exception $e): array
     {
+        \Log::info($e);
+
         return [
             'message' => __($e->getMessage()),
-            'data'    => optional($e)->errors(),
+            'data'    => optional($e)->errors() ?? '',
             'status'  => optional($e)->status ?? 500,
             'file'    => $e->getFile(),
             'line'    => $e->getLine(),

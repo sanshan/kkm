@@ -86,7 +86,7 @@
                     return response.data;
                 } catch (error) {
                     this.$buefy.toast.open({
-                        duration: 2000,
+                        duration: 5000,
                         message: error.response.data.message,
                         position: 'is-bottom',
                         type: 'is-danger'
